@@ -1,0 +1,68 @@
+﻿@using OnlineJwelaryShop.Models
+@{
+    ViewBag.Title = "AddtoCartView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["cart"] == null)
+{
+    <div style="padding-top:5%">
+
+    </div>
+    <div class="alert alert-danger" style="text-align:center;padding:5%;margin-left:30%;margin-right:30%">
+        <h2>Cart is Empty!</h2>
+    </div>
+    <div style="padding-bottom:7%">
+
+    </div>
+
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th><h4 style="text-align:center">Product Name</h4></th>
+                <th><h4 style="text-align:center">Image</h4></th>
+                <th><h4 style="text-align:center">Price</h4></th>
+                <th><h4 style="text-align:center">Quantity</h4></th>
+                <th><h4 style="text-align:center">Line Total</h4></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int Total = 0;
+            }
+            @foreach (item item in (List<item>)Session["cart"])
+            {
+
+                int productPrice = Convert.ToInt32(item.ProductCartTable.Rows[0][2]);
+                int lineTotal = Convert.ToInt32(item.Quantity * productPrice);
+                Total = Convert.ToInt32(@Total + lineTotal);
+                Session["amount"] = Total;
+                <tr>
+                    <td style="text-align:center">@item.ProductCartTable.Rows[0][1]</td>
+                    <td style="text-align:center"><img src="@Url.Content(@item.ProductCartTable.Rows[0][3].ToString())" height=100 width=100 /></td>
+
+                    <td style="text-align:center">@productPrice</td>
+                    <td style="text-align:center">@item.Quantity</td>
+                    <td style="text-align:right">@lineTotal</td>
+                </tr>
+            }
+
+            <tr>
+                <td colspan="5" class="text-right"><b>Total: @Total</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="padding-bottom:5%;padding-top:3%">
+        <div style="float:left;padding-left:40%; padding-right:10%">
+            <a class="btn btn-success btn-lg" style="height:40px; width:100px;font-size:20px" href="../Home/payment ">Payment</a>
+        </div>
+        <div>
+            <a class="btn btn-success btn-lg" style="padding-left:10px;height:40px; width:100px;font-size:20px" href="../Home/Addtocartedit ">Edit Cart </a>
+        </div>
+    </div>
+}
+

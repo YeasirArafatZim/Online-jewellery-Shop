@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Catagory</title>
+    <script type="text/javascript" language="javascript" src="category_ajax_function.js"></script>
+    <!-- bootstrap  start -->
+    <script src="~/Content/admin/jquery.min.js"></script>
+    <link href="~/Content/admin/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/admin/font-awesome.min.css" rel="stylesheet">
+    <!-- bootstrap  end -->
+    <!-- menu start -->
+    <link rel="stylesheet" href="~/Content/admin/styles.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="~/Content/admin/script.js"></script>
+    <!-- menu start -->
+
+    <link rel="stylesheet" href="~/Content/admin/style_1.css">
+    <script language="javascript" type="text/javascript" src="~/Content/admin/tiny_mce.js"></script>
+
+</head>
+<body style="background-color:#FFFFFF;">
+    <div class="row" style="width:100%; padding-bottom:20px;">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-md-2" style="padding-bottom:10px; padding-top:10px; padding-left:45px; background:#167aaf; color:#FFFFFF; font-size:18px;">
+                <strong>Admin Panel</strong>
+            </div>
+            <div class="col-md-8" style="padding-bottom:16px; padding-top:10px; background:#49505a; color:#FFFFFF;">
+                &nbsp;
+            </div>
+            <div class="col-md-2" align="left" style="padding-bottom:16px; padding-top:10px; background:#2ca6e5;">
+                <a href="../profile" class="logout">&nbsp;<span>My Profile</i></span></a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;<span>@Html.ActionLink("Log Out", "logout", "Admin", new {@class = "logout"})</span>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+
+            <!-- Left menu -->
+            <div class="row" style="padding-right:10px; padding-left:5px;">
+                <div id='cssmenu'>
+                    <ul>
+                        <li><a href=""><span>Dashboard</span></a></li>
+                        <li><a href=""><span>About Us</span></a></li>
+                        <li><a href=""><span>Slider Manage</span></a></li>
+                        <li>@Html.ActionLink("Products Category", "AddCategory", "Admin")</li>
+                        <li>@Html.ActionLink("Products Sub Category", "AddSubcategory", "Admin")</li>
+                        <li>@Html.ActionLink("Products Manage", "cat", "Admin")</li>
+                        <li>@Html.ActionLink("Order Details", "OrderDetails", "Admin")</li>
+                        <li><a href=""><span>Payment Method</span></a></li>
+                        <li>@Html.ActionLink("Registration View", "RegistrationView", "Admin")</li>
+                        <li><a href=""><span>Profile</span></a></li>
+                        <li>@Html.ActionLink("Log Out", "logout", "Admin")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

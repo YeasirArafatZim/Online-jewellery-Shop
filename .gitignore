@@ -1,0 +1,6 @@
+.vs
+packages/*
+OnlineJwelaryShop/bin/*
+OnlineJwelaryShop/App_Data/*
+OnlineJwelaryShop/App_Start/*
+

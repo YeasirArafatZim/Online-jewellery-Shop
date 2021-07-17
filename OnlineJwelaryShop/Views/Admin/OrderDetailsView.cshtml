@@ -1,0 +1,191 @@
+﻿@model OnlineJwelaryShop.Models.Order_details
+@{
+    ViewBag.Title = "OrderDetailsView";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row shadow1" style="padding-top:10px; padding-bottom:10px; margin-top:15px; padding-left:15px;">
+    <strong style="font-size:20px;">Product Order Details</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Control panel</span>
+</div>
+
+
+
+<div class="row" style="padding-top:20px;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <strong style="font-size:18px; color:#666666; margin-left:15px; border-bottom:solid 1px #666666;">Shipping Address</strong>
+                <div style="padding-top:10px;">
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Name</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.userData.name </div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Phone No</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.userData.PhnNo </div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Email Address</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.userData.email</div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Address</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.userData.address</div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <strong style="font-size:18px; color:#666666; margin-left:15px; border-bottom:solid 1px #666666;">Bkash Payment Details</strong>
+                <div style="padding-top:10px;">
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Phone Number</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.pay.bkash_phone_no</div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Amount</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.pay.amount </div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Bkash TrxID</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.pay.TxnId </div>
+                </div>
+                <div>
+                    <div class="col-md-4" style="text-align:left; color:#666666;">Payment Date</div>
+                    <div class="col-md-8" style="color:#666666;">: @ViewBag.pay.payment_date </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row" style="padding-top:5px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8; margin-top:40px;">
+            <div class="col-md-1">
+                <div class="row" style="padding-left:5px;">
+                    <strong>Sl. No</strong>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="row">
+                    <strong>Image</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <strong>Product Name</strong>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <strong>Product Price</strong>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+                    <strong>Quantity</strong>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row" style="padding-left:40%">
+                    <strong>Total</strong>
+                </div>
+            </div>
+        </div>
+
+        @{
+            var count = 1;
+
+            int total = 0;
+            foreach (var item in ViewBag.product)
+            {
+                
+                int subTotal = item.Quantity * item.ProductTable.Rows[0][2];
+                total = total + subTotal;
+
+
+                <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+                    <div class="col-md-1">
+                        <div class="row" style="padding-left:5px;">
+                            @count
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="row">
+                            <a href="@Url.Action("viewDetails", "Admin", new { id = item.ProductTable.Rows[0][0] })">
+                                <img class="img-responsive" style="height:100px;width:100px;" src="@Url.Content((string)item.ProductTable.Rows[0][3])">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            @item.ProductTable.Rows[0][1]
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            @item.ProductTable.Rows[0][2]
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="row">
+                            @item.Quantity
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="row" align="right" style="padding-right:30px;">
+                            @subTotal
+                        </div>
+                    </div>
+                   
+                </div>
+
+                count++;
+                
+            }
+
+        }
+
+        <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+            <div class="col-md-10">
+
+                <strong style="margin-left:92%">Total Price</strong>
+
+            </div>
+            <div class="col-md-2">
+                <p style="margin-left:12%">@total</p>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Order.payment_status == "Pending")
+{
+
+using (Html.BeginForm("OrderStatus", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="row" style="padding-top:20px;">
+
+    <label style="padding-top:20px;">Select Your Option</label>
+    @Html.DropDownList("status", new List<SelectListItem>
+
+            {
+
+            new SelectListItem {Text = "Pending", Value="Pending"  },
+
+            new SelectListItem {Text = "Paid", Value="Paid"  },
+
+            }, new { @class = "form-control" })
+   
+</div>
+    <br/>
+    <button class="btn btn-info">Submit</button>
+}
+}
+
+
+
+

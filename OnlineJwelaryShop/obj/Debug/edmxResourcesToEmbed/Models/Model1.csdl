@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="cart_id" />
+    </Key>
+    <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="unique_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="book_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="product" Relationship="Self.FK__cart__book_id__5BE2A6F2" FromRole="cart" ToRole="products" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__cart__user_id__5AEE82B9" FromRole="cart" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="img_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="sub_category" Relationship="Self.FK__sub_categ__cat_i__5535A963" FromRole="category" ToRole="sub_category" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhnNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__user_id__5AEE82B9" FromRole="Customer" ToRole="cart" />
+    <NavigationProperty Name="histories" Relationship="Self.FK__history__user_id__6477ECF3" FromRole="Customer" ToRole="history" />
+    <NavigationProperty Name="Order_details" Relationship="Self.FK__Order_det__user___60A75C0F" FromRole="Customer" ToRole="Order_details" />
+  </EntityType>
+  <EntityType Name="history">
+    <Key>
+      <PropertyRef Name="history_id" />
+    </Key>
+    <Property Name="history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unique_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__history__user_id__6477ECF3" FromRole="history" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Order_details">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unique_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="payment_id" Type="Int32" Nullable="false" />
+    <Property Name="payment_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Order_det__user___60A75C0F" FromRole="Order_details" ToRole="Customer" />
+    <NavigationProperty Name="payment" Relationship="Self.FK__Order_det__payme__619B8048" FromRole="Order_details" ToRole="payment" />
+  </EntityType>
+  <EntityType Name="payment">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bkash_phone_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="amount" Type="Int32" Nullable="false" />
+    <Property Name="TxnId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="unique_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order_details" Relationship="Self.FK__Order_det__payme__619B8048" FromRole="payment" ToRole="Order_details" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="img_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sub_cat_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__book_id__5BE2A6F2" FromRole="products" ToRole="cart" />
+    <NavigationProperty Name="sub_category" Relationship="Self.FK__products__sub_ca__5812160E" FromRole="products" ToRole="sub_category" />
+  </EntityType>
+  <EntityType Name="sub_category">
+    <Key>
+      <PropertyRef Name="sub_cat_id" />
+    </Key>
+    <Property Name="sub_cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="img_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cat_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="Self.FK__sub_categ__cat_i__5535A963" FromRole="sub_category" ToRole="category" />
+    <NavigationProperty Name="products" Relationship="Self.FK__products__sub_ca__5812160E" FromRole="sub_category" ToRole="products" />
+  </EntityType>
+  <Association Name="FK__cart__book_id__5BE2A6F2">
+    <End Role="products" Type="Self.product" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__user_id__5AEE82B9">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sub_categ__cat_i__5535A963">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="sub_category" Type="Self.sub_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="sub_category">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__history__user_id__6477ECF3">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="history" Type="Self.history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="history">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_det__user___60A75C0F">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Order_details" Type="Self.Order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Order_details">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order_det__payme__619B8048">
+    <End Role="payment" Type="Self.payment" Multiplicity="1" />
+    <End Role="Order_details" Type="Self.Order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="payment">
+        <PropertyRef Name="payment_id" />
+      </Principal>
+      <Dependent Role="Order_details">
+        <PropertyRef Name="payment_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__sub_ca__5812160E">
+    <End Role="sub_category" Type="Self.sub_category" Multiplicity="1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sub_category">
+        <PropertyRef Name="sub_cat_id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="sub_cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnlineShopEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="histories" EntityType="Self.history" />
+    <EntitySet Name="Order_details" EntityType="Self.Order_details" />
+    <EntitySet Name="payments" EntityType="Self.payment" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="sub_category" EntityType="Self.sub_category" />
+    <AssociationSet Name="FK__cart__book_id__5BE2A6F2" Association="Self.FK__cart__book_id__5BE2A6F2">
+      <End Role="products" EntitySet="products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__user_id__5AEE82B9" Association="Self.FK__cart__user_id__5AEE82B9">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sub_categ__cat_i__5535A963" Association="Self.FK__sub_categ__cat_i__5535A963">
+      <End Role="category" EntitySet="categories" />
+      <End Role="sub_category" EntitySet="sub_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__history__user_id__6477ECF3" Association="Self.FK__history__user_id__6477ECF3">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="history" EntitySet="histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_det__user___60A75C0F" Association="Self.FK__Order_det__user___60A75C0F">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order_details" EntitySet="Order_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order_det__payme__619B8048" Association="Self.FK__Order_det__payme__619B8048">
+      <End Role="payment" EntitySet="payments" />
+      <End Role="Order_details" EntitySet="Order_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__sub_ca__5812160E" Association="Self.FK__products__sub_ca__5812160E">
+      <End Role="sub_category" EntitySet="sub_category" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "history";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row shadow1" style="padding-top:10px; padding-bottom:30px; #CCCCCC; margin-top:15px; padding-left:15px;">
+    <strong style="font-size:20px;">Order Details</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Your History</span>
+</div>
+
+<div class="row" style="padding-top:5px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8;">
+    <div class="col-md-2">
+        <div class="row" style="text-align:center">
+            <strong>Sr. No</strong>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row" style="text-align:center">
+            <strong>Payment Status</strong>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row" style="text-align:center">
+            <strong>Date</strong>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row" style="text-align:center">
+            <strong>View Details</strong>
+        </div>
+    </div>
+</div>
+@{
+    var count = 0;
+    foreach (var item in ViewBag.history)
+    {
+        count++;
+        <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+            <div class="col-md-2">
+                <div class="row" style="text-align:center">
+                    <p>@count</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row" style="text-align:center;margin-left:35px">
+                    @item.payment_status
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row" style="text-align:center">
+                    @item.order_date
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row" style="text-align:center;padding-left:30px">
+                    <a href="@Url.Action("OrderHistory", "Home", new { id = item.order_id })"><img style="height:35px;width:35px;" src="~/Content/assets/img/edit12.png"></a>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+<div style="margin-bottom:100px;">
+
+</div>
+

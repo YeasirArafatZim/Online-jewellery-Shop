@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "message";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row shadow1" style="padding-top:10px; padding-bottom:10px; #CCCCCC; margin-top:15px; padding-left:15px;">
+    <strong style="font-size:20px;">Customers Messages</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Control panel</span>
+</div>
+
+<div class="row" style="padding-top:10px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8;">
+    <div class="col-md-1">
+        <div class="row" style="padding-left:5px;">
+            <strong>Sr. No</strong>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <strong>Name</strong>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <strong>Email</strong>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="row" style="text-align:center">
+            <strong>Phone Number</strong>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row" style="text-align:center">
+            <strong>Messages</strong>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="row" style="text-align:center">
+            <strong>Delete</strong>
+        </div>
+    </div>
+</div>
+@{
+    var count = 0;
+    foreach (var item in ViewBag.msg)
+    {
+        count++;
+        <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+            <div class="col-md-1">
+                <div class="row" style="padding-left:5px;">
+                    @count
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    @item.name
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    @item.email
+                </div>
+            </div>
+
+            <div class="col-md-2" style="text-align:center">
+                <div class="row">
+                    @item.phn
+                </div>
+            </div>
+
+            <div class="col-md-4" style="text-align:center">
+                <div class="row">
+                    @item.message1
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="row" style="text-align:center">
+                    <a href="@Url.Action("deleteMessage", "Admin", new { id = item.message_id })"><img style="height:35px;width:35px;" src="~/Content/assets/img/delete.ico"></a>
+                </div>
+            </div>
+        </div>
+    }
+}
+

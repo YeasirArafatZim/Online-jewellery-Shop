@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    
+}
+<script src="~/Content/aboutCss/js/jquery.min.js"></script>
+<script src="~/Content/aboutCss/js/jquery.scrollex.min.js"></script>
+<script src="~/Content/aboutCss/js/skel.min.js"></script>
+<script src="~/Content/aboutCss/js/util.js"></script>
+<script src="~/Content/aboutCss/js/main.js"></script>
+
+
+<!--== Banner // Slider Area Start ==-->
+<section class="banner full">
+    <article>
+        <img src="~/Content/aboutImage/slide01.jpg" alt="" />
+        <div class="inner">
+            <header>
+                <p>Add a little </p>
+                <h2>Sparkle</h2>
+            </header>
+        </div>
+    </article>
+    <article>
+        <img src="~/Content/aboutImage/slide02.jpg" alt="" />
+        <div class="inner">
+            <header>
+                <p>There is always room for</p>
+                <h2>More Jewellery</h2>
+            </header>
+        </div>
+    </article>
+    <article>
+        <img src="~/Content/aboutImage/slide04.jpg" alt="" />
+        <div class="inner">
+            <header>
+                <p>It is okay to be a little jewellery</p>
+                <h2>Obsessed</h2>
+            </header>
+        </div>
+    </article>
+</section>
+<!--== Banner Slider End ==-->
+<!--== Featured Products Area Start ==-->
+
+<div id="category-feature-product" class="pt-9">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <!-- Section Title Start -->
+            <div class="section-title">
+                <h2>Categories</h2>
+            </div>
+            <!-- Section Title End -->
+        </div>
+    </div>
+
+    <div id="category-feature-product" class="pt-9">
+        <div class="ruby-container">
+            <div class="row">
+                @{
+                    foreach (var item in ViewBag.catagories)
+                    {
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="single-featured-product">
+                                        <a href="@Url.Action("Category", "Home", new {id = item.cat_id})"><img class="img-fluid" style="height:270px;width:1000px;" alt="Products" src="@Url.Content(@item.img_name)"></a>
+
+                                    </div>
+                                    <h2 style="text-align:center"><strong>@item.name</strong></h2>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <!--== Featured Products Area End ==-->
+    <!--== New Products Area Start ==-->
+    <section id="new-products-area" class="p-9">
+        <div class="ruby-container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h2>New Products</h2>
+                        <p>Trending stunning Unique</p>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="products-wrapper">
+                        <div class="new-products-carousel owl-carousel">
+                          @foreach (var item in ViewBag.latestProduct)
+                          {
+                            <!-- Single Product Item -->
+                            <div class="single-product-item text-center">
+                                <figure class="product-thumb">
+                                    <a href="single-product.html">
+                                        <a href="@Url.Action("viewDetails", "Home", new { id = item.product_id })"><img class="img-fluid" style="height:220px;" alt="Products" src="@Url.Content(@item.img_name)"></a>
+                                    </a>
+                                </figure>
+
+                                <div class="product-details">
+                                    <h2><a href="single-product.html">@item.name</a></h2>
+                                   
+                                    <span class="price">@item.price</span>
+                                    <div><a href="@Url.Action("AddtoCart", "Home", new { id = item.product_id})" class="btn btn-add-to-cart">+ Add to Cart</a></div>
+                                    <span class="product-bedge sale">New</span>
+                                </div>                             
+                            </div>
+                          }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--== New Products Area End ==-->
+
+    
+    <!--== Categories Products Area End ==-->
+    <!--== Testimonial Area Start ==-->
+    <section id="testimonial-area" class="mt-9">
+        <div class="ruby-container">
+            <div class="testimonial-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h2>What People Say</h2>
+                            <p>Testimonials</p>
+                        </div>
+                        <!-- Section Title End -->
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-7 m-auto text-center">
+                        <div class="testimonial-content-wrap">
+                            <div id="testimonialCarousel" class="owl-carousel">
+                                @foreach (var item in ViewBag.Feedbacks)
+                                {
+                                    <div class="single-testimonial-item">
+                                        <p>
+                                            @item.feedback1
+                                        </p>
+
+                                        <h3 class="client-name">@item.name</h3>
+                                        <span class="client-email">@item.email</span>
+                                    </div>
+
+                                }
+
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--== Testimonial Area End ==-->
+    <!--== Newsletter Area Start ==-->
+    
+
+

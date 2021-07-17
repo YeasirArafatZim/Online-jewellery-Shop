@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <div class="row shadow1" style="padding-top:10px; padding-bottom:10px; #CCCCCC; margin-top:15px; padding-left:15px;">
+        <strong style="font-size:20px;">Order Details</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Control panel</span>
+    </div>
+
+    <div class="row" style="padding-top:5px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8;">
+        <div class="col-md-2">
+            <div class="row" style="padding-left:5px;">
+                <strong>Sr. No</strong>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <strong>User Name</strong>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <strong>Payment Status</strong>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row" style="text-align:center">
+                <strong>Date</strong>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row" style="text-align:center">
+                <strong>View Details</strong>
+            </div>
+        </div>
+    </div>
+@{ 
+    var count = 0;
+    foreach (var item in ViewBag.orders)
+    {
+        count++;
+    <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+        <div class="col-md-2">
+            <div class="row" style="padding-left:5px;">
+                @count
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                @item.user_id
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                @item.payment_status
+            </div>
+        </div>
+
+        <div class="col-md-2" style="text-align:center">
+            <div class="row">
+                @item.order_date
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row" style="text-align:center">
+                <a href="@Url.Action("OrderDetailsView", "Admin", new { id = item.order_id })"><img style="height:35px;width:35px;" src="~/Content/assets/img/edit12.png"></a>
+            </div>
+        </div>
+    </div>
+        }
+    }
+
+

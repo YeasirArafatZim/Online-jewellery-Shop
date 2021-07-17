@@ -1,0 +1,30 @@
+﻿@model OnlineJwelaryShop.Models.category
+@{
+    ViewBag.Title = "cat";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row shadow1" style="padding-top:10px; padding-bottom:10px; #CCCCCC; margin-top:15px; padding-left:15px;">
+    <strong style="font-size:20px;">Products Manage</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Control panel</span>
+</div>
+<div class="row" style="padding-bottom:30px;">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-8">
+        <div class="row" style="padding-top:20px;">
+            @using (Html.BeginForm("cat", "Admin", FormMethod.Post))
+            {
+                <label style="padding-top:20px;">Select Category</label>
+                @Html.DropDownListFor(m => m.cat_id, new SelectList(ViewBag.Data, "cat_id", "name"), "--Select Category--", new { @class = "form-control" })
+                <div style="padding-top:20px">
+                <button class="btn btn-info" >Next</button>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>
+

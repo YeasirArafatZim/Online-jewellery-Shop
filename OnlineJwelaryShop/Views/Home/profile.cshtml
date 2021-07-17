@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h1 style="text-align:center;font-weight:bold;padding-bottom:50px;padding-top:3%; color:black">Your Profile</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 style="font-weight:bold;padding-left:82%"> Name: </h2>
+    </div>
+    <div class="col-md-6">
+        <p style="text-align:left;font-size:20px">@TempData["Name"]</p>
+    </div>
+</div>
+
+<div class="row" style="padding-top:.5%">
+    <div class="col-md-6">
+        <h2 style="font-weight:bold;padding-left:82%"> Email: </h2>
+    </div>
+    <div class="col-md-6">
+        <p style="text-align:left;font-size:20px">@TempData["Email"]</p>
+    </div>
+</div>
+
+<div class="row" style="padding-top:.5%">
+    <div class="col-md-6">
+        <h2 style="font-weight:bold;padding-left:82%"> Address: </h2>
+    </div>
+    <div class="col-md-6">
+        <p style="text-align:left;font-size:20px">@TempData["Address"]</p>
+    </div>
+</div>
+
+<div class="row" style="padding-top:.5%">
+    <div class="col-md-6">
+        <h2 style="font-weight:bold;padding-left:82%"> Phone No: </h2>
+    </div>
+    <div class="col-md-6">
+        <p style="text-align:left;font-size:20px">@TempData["Phn"]</p>
+    </div>
+</div>
+
+
+<div style="padding-top:3%">
+    <center><h2>Thank you for visiting our Website</h2></center>
+</div>
+

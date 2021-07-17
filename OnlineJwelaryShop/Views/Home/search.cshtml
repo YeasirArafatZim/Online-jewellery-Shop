@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <section id="new-products-area" class="p-9">
+        <div class="ruby-container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h2>Your Desired Product</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="products-wrapper">
+                        <div class="new-products-carousel owl-carousel">
+
+                            <!-- Single Product Item -->
+                            @for (int i = 0; i < Model.Rows.Count; i++)
+                            {
+                                <div class="single-product-item text-center">
+                                    <figure class="product-thumb">
+                                        <a href="@Url.Action("viewDetails", "Home", new {id = Model.Rows[i][0]})"><img class="img-fluid" style="height:230px;" alt="Products" src="@Url.Content(@Model.Rows[i][3])"></a>
+                                    </figure>
+
+                                    <div class="product-details">
+                                        <h2><a href="single-product.html">@Model.Rows[i][1]</a></h2>
+
+                                        <span class="price">@Model.Rows[i][2]</span>
+                                        <a href="single-product.html" class="btn btn-add-to-cart">+ Add to Cart</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    

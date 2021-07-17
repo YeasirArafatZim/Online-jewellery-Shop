@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "viewDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <section id="new-products-area" class="p-9">
+
+
+
+
+        <div style="margin-left:25%">
+            <img class="img-fluid" align="left" style="height:400px;width:400px;margin-right:10%;box-shadow: 10px 10px 25px grey;" src="@Url.Content(ViewBag.product.img_name)">
+            <h1 style="font-size:40px;padding-top:10%">@ViewBag.product.name</h1>
+            <h3 style="margin-top:2%;font-size:28px">@ViewBag.product.price BDT</h3>
+        </div>
+
+
+    </section>
+

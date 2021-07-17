@@ -1,0 +1,122 @@
+﻿@model OnlineJwelaryShop.Models.product
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="row shadow1" style="padding-top:10px; padding-bottom:10px; #CCCCCC; margin-top:15px; padding-left:15px;">
+    <strong style="font-size:20px;">Products Manage</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Control panel</span>
+</div>
+<div class="row" style="padding-bottom:30px;">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-8">
+        <div class="row" style="padding-top:20px;">
+            @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+                <label style="padding-top:20px;">Sub Products Category Name</label>
+                @Html.DropDownListFor(m => m.sub_cat_id, new SelectList(ViewBag.Data, "sub_cat_id", "name"), "--Select Sub Category--", new { @class = "form-control" })
+
+                <label style="padding-top:20px;">Products Name</label>
+                @Html.EditorFor(x => x.name, new { htmlAttributes = new { @class = "form-control", placeholder = "* Products Name", required = "required" } })
+
+                <label style="padding-top:20px;">Product Image</label>
+                <input type="file" name="file" id="file" />
+
+
+                <label style="padding-top:20px;">Products Price</label>
+                @Html.EditorFor(x => x.price, new { htmlAttributes = new { @class = "form-control", placeholder = "* Products Price", required = "required" } })
+                <div style="padding-top:10px;"></div>
+                <button class="btn btn-info">Submit</button> <button class="btn btn-warning" type="reset">Reset</button>
+
+}
+        </div>
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>
+
+<div class="row" style="padding-top:5px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8;">
+    <div class="col-md-1">
+        <div class="row" style="padding-left:5px;">
+            <strong>Sr. No</strong>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <strong>Products Sub Category Name</strong>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row">
+            <strong>Products Name</strong>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="row">
+            <strong>Price</strong>
+        </div>
+    </div>
+    
+    <div class="col-md-1">
+        <div class="row">
+            <strong>Image</strong>
+        </div>
+    </div>
+    
+    <div class="col-md-1">
+        <div class="row">
+            <strong>Delete</strong>
+        </div>
+    </div>
+</div>
+<div class="row" id="div_for_view">
+    @{
+        var count = 0;
+        foreach (var item in ViewBag.ProWithSub)
+        {
+            count++;
+            <div class="row" style="border-bottom:solid 1px #CCCCCC; padding-left:15px; padding-right:15px;">
+                <div class="col-md-1">
+                    <div class="row" style="padding-left:5px;">
+                        @count
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        @item.Sub_Category.name
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        @item.Product.name
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="row">
+                        @item.Product.price
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="row">
+                        <img class="img-responsive" style="height:40px;width:40px;" src="@Url.Content(@item.Product.img_name)">
+                    </div>
+                </div>
+               
+                
+                <div class="col-md-1">
+                    <div class="row">
+                        <a href="@Url.Action("deleteProduct", "Admin", new {id = item.Product.product_id})"><img style="height:35px;width:35px;" src="~/Content/assets/img/delete.ico"></a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+        </div>
+
+

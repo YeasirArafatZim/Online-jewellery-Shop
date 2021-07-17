@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row shadow1" style="padding-top:10px; padding-bottom:10px; margin-top:15px; padding-left:15px;">
+        <strong style="font-size:20px;">Product Order Details</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Your Orders</span>
+    </div>
+
+    <div class="row" style="padding-top:20px;">
+        <div class="col-md-12">          
+            <div class="row" style="padding-top:5px; padding-bottom:5px; border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; background-color:#F8F8F8; margin-top:40px;">
+                <div class="col-md-1">
+                    <div class="row" style="padding-left:5px;">
+                        <strong>Sl. No</strong>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="row">
+                        <strong>Image</strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <strong>Product Name</strong>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <strong>Product Price</strong>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class="row">
+                        <strong>Quantity</strong>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class="row" align="right" style="padding-left:40px">
+                        <strong>Total</strong>
+                    </div>
+                </div>
+            </div>
+
+            @{
+                var count = 1;
+
+                int total = 0;
+                foreach (var item in ViewBag.product)
+                {
+
+                    int subTotal = item.Quantity * item.ProductTable.Rows[0][2];
+                    total = total + subTotal;
+
+
+                        <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+                            <div class="col-md-1">
+                                <div class="row" style="padding-left:5px;">
+                                    <p>@count</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <a href="@Url.Action("viewDetails", "Home", new { id = item.ProductTable.Rows[0][0] })">
+                                        <img class="img-responsive" style="height:60px;width:70px;" src="@Url.Content((string)item.ProductTable.Rows[0][3])">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row" style="padding-left:25px;">
+                                    @item.ProductTable.Rows[0][1]
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row" style="padding-left:40px;">
+                                    @item.ProductTable.Rows[0][2]
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="row" style="padding-left:45px;">
+                                    @item.Quantity
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="row" align="right" style="padding-left:63px">
+                                    @subTotal
+                                </div>
+                            </div>
+                        </div>
+                    
+                    count++;
+
+                }
+
+            }
+
+            <div class="row" style="border-bottom:solid 1px #CCCCCC;">
+                <div class="col-md-10">
+
+                    <strong style="margin-left:92%">Total Price</strong>
+
+                </div>
+                <div class="col-md-2">
+                    <p style="margin-left:26%">@total</p>
+                </div>
+            </div>
+        </div>
+    </div>
